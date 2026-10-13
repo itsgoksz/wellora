@@ -1,74 +1,89 @@
 # 🌿 Wellora
 
-> **Private, local-first AI nutrition companion with an interactive 3D voice orb.** Talk to Wellora naturally to log meals, track macros, and understand your diet without cloud surveillance.
+> **Private, local-first AI nutrition companion with an interactive 3D voice orb.** Speak your meals naturally in plain language; Wellora decomposes ingredients, estimates portions, and tracks macronutrients via offline local LLMs without cloud surveillance.
 
 <p align="center">
-  <img src="assets/preview.png" alt="Wellora App Preview" width="100%" style="border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);" />
+  <img src="assets/wellora_hero_preview.png" alt="Wellora Product Showcase" width="100%" style="border-radius: 18px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.12);" />
 </p>
 
 ---
 
-## Why Wellora?
+## 🍃 Why Wellora?
 
-Logging your food into traditional nutrition apps is tedious: you search clunky barcode databases, guess gram weights for home-cooked meals, and surrender your health data to third-party ad networks.
+Logging food in mainstream fitness apps feels like data entry punishment:
+- You spend 10 minutes scanning barcodes, guessing gram weights for home-cooked Indian dishes, and manually entering oil spoons.
+- Commercial apps monetize your health data, packaging your diet logs for advertising networks.
+- Rigid calorie goals turn nutrition into an anxiety-inducing spreadsheet instead of a sustainable, healthy habit.
 
-**Wellora** was built around three simple beliefs:
-1. **Natural Dialogue:** You should be able to say *"I had two dosas with coconut chutney and a cup of filter coffee"* and have it broken down automatically into calories, protein, carbs, and fats.
-2. **Local-First Privacy:** Powered by local LLMs via **Ollama** (e.g. Gemma or Llama 3) running on your own machine. Your intimate dietary habits remain strictly on your device.
-3. **Immersive Physical Interface:** Instead of sterile spreadsheets, Wellora features an interactive **3D glowing voice orb** (built with Three.js) that responds to conversational states in real time.
+**Wellora was built around three simple principles:**
+1. **Natural Conversational Logging:** Say *"had two dosas with coconut chutney, sambar, and filter coffee"*—Wellora automatically breaks the meal down into ingredients, portions, calories, and macros.
+2. **Local-First Privacy:** Powered by local open-weight LLMs via **Ollama** (Gemma 2 or Llama 3) running directly on your hardware. What you eat never leaves your machine.
+3. **Immersive Physical 3D Orb:** Instead of clinical forms, Wellora features a responsive **Three.js glowing voice sphere** that pulses, ripples, and responds to your voice states in real time.
+4. **Zero Hallucinated Calories:** Rather than letting the LLM guess calorie numbers out of thin air, Wellora queries curated offline nutritional datasets (`food-calorie-data.csv`) using fuzzy matching to ground every macro count in reality.
+
+---
+
+## 📱 Live Experience & Visual Dashboard
+
+<p align="center">
+  <img src="assets/preview.png" alt="Wellora Live Dashboard & 3D Orb Preview" width="100%" style="border-radius: 16px; box-shadow: 0 16px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);" />
+</p>
 
 ---
 
 ## 🧠 Nutrition Intelligence Pipeline
 
-Wellora's backend runs on **FastAPI** and **LangGraph**, routing queries through an asynchronous multi-agent pipeline:
+Wellora's architecture combines **FastAPI**, **LangGraph**, and **Ollama** into an asynchronous stateful pipeline:
 
 ```mermaid
 flowchart TD
-    User([User Voice / Text]) --> API[FastAPI /chat Endpoint]
+    User([User Voice or Text]) --> API[FastAPI /chat API Endpoint]
     API --> Orch[LangGraph Orchestrator]
     
-    subgraph MultiAgentPipeline [Local Agent Pipeline]
-        Orch --> Classify[Intent Classifier
+    subgraph LocalPipeline [Local Privacy Multi-Agent Pipeline]
+        Orch --> Classify[Intent Classifier Agent
 Meal Log vs Health Q&A vs Follow-up]
-        Classify -->|Meal Log| Extract[Entity Extractor
-Isolates Ingredients & Portions]
-        Classify -->|General Chat| Companion[Companion Agent
-Conversational Wellness Advice]
+        
+        Classify -->|Meal Log| Extract[Entity Extractor Agent
+Deconstructs Ingredients & Portions]
+        Classify -->|Wellness Advice| Companion[Companion Agent
+Zero-Judgment Supportive Persona]
         
         Extract --> FoodDB[Fuzzy Food Database Engine
-Matches against food-calorie-data.csv]
-        FoodDB --> Nutrition[Calculate Calories, Protein, Carbs, Fats]
+Matches food-calorie-data.csv Datasets]
+        FoodDB --> Nutrition[Calculate Calories, Protein, Carbs, Fats, Fiber]
         Nutrition --> Memory[Memory Agent
-Habit Streaks & Historical Context]
+Habit Streaks & 7-Day Dietary Trends]
         Memory --> Companion
     end
 
-    Companion --> DB[(SQLite Database
+    Companion --> DB[(Local SQLite Database
 wellora.db)]
     Companion --> Voice[VoiceBox Service
-Neural Audio Synthesis]
+Cached Neural Audio Synthesis]
     Companion & Voice --> Frontend[React 3D Orb & Macro Dashboard]
 ```
 
-### How Food Parsing Works
-- **Zero-Guesswork Entity Extraction:** The extractor decomposes complex meals into atomic items (e.g., separating cooked rice, dal, vegetables, and ghee).
-- **Fuzzy Nutritional Dataset Matching:** Rather than hallucinating calorie numbers, `food_db.py` matches items against curated datasets (`food-calorie-data.csv` and grouped nutritional libraries) to retrieve grounded macronutrient data.
-- **Empathetic Companion Tone:** Provides constructive nutritional insights without guilt, lecturing, or clinical jargon.
+### The Multi-Agent Suite
+- **Intent Classifier (`classifier.py`):** Automatically distinguishes whether the user is logging breakfast, asking a nutritional question (*"Is curd rice good after a workout?"*), or clarifying a previous entry.
+- **Entity Extractor (`extractor.py`):** Parses unformatted speech into structured JSON containing individual dishes, modifiers, and estimated portion sizes.
+- **Fuzzy Food Matcher (`food_db.py`):** Runs `difflib.get_close_matches` against verified CSV datasets to map food names to authentic nutritional values.
+- **Supportive Companion (`companion.py`):** Offers constructive nutritional context and streak encouragement without clinical guilt or scolding.
+- **Interactive Three.js Orb (`ThreeOrb.jsx`):** A custom WebGL vertex-displaced particle sphere with dynamic shaders that morph through idle, listening, thinking, and speaking states.
 
 ---
 
 ## 🛠️ Tech Stack
 
-| Layer | Technology | Details |
+| Layer | Technology | Description |
 | :--- | :--- | :--- |
-| **Local LLM Runtime** | [Ollama](https://ollama.com/) | Offline local model inference (Gemma / Llama) |
+| **Local LLM Engine** | [Ollama](https://ollama.com/) (Gemma 2 / Llama 3) | 100% offline local model inference |
 | **Agent Framework** | [LangGraph](https://langchain-ai.github.io/langgraph/) & [LangChain](https://www.langchain.com/) | Stateful multi-agent conversation graph |
-| **Backend API** | [FastAPI](https://fastapi.tiangolo.com/) (Python 3.10+) | Asynchronous REST endpoints & audio streaming |
+| **Backend API** | [FastAPI](https://fastapi.tiangolo.com/) (Python 3.10+) | High-performance asynchronous API server |
 | **Database** | SQLite + [SQLAlchemy](https://www.sqlalchemy.org/) | Local storage for meals, user profiles, and daily goals |
-| **Frontend UI** | [React](https://react.dev/) + [Vite](https://vite.dev/) | Ultra-responsive client with custom glassmorphism |
-| **3D Voice Visualizer**| [Three.js](https://threejs.org/) | Vertex-displaced glowing orb with fluid audio reactivity |
-| **State Management** | [Zustand](https://github.com/pmndrs/zustand) | Client store for chat messages, audio, and metrics |
+| **Frontend UI** | [React](https://react.dev/) + [Vite](https://vite.dev/) | Smooth responsive interface with glassmorphism |
+| **3D Voice Visualizer**| [Three.js](https://threejs.org/) | Dynamic glowing particle orb with audio-reactive shaders |
+| **State Store** | [Zustand](https://github.com/pmndrs/zustand) | Client-side reactive store for audio, chat & metrics |
 
 ---
 
@@ -76,13 +91,14 @@ Neural Audio Synthesis]
 
 ```text
 Wellora/
-├── assets/                       # Visual preview & branding
-│   ├── preview.png
-│   └── hero.png
+├── assets/                       # Branding & showcase captures
+│   ├── wellora_hero_preview.png  # Namma Universe product showcase
+│   ├── preview.png               # Live dashboard & 3D orb capture
+│   └── hero.png                  # Companion branding asset
 ├── backend/                      # Python FastAPI server
 │   ├── agents/                   # LangGraph agent pipeline
 │   │   ├── orchestrator.py       # Main state machine & pipeline flow
-│   │   ├── classifier.py         # Intent classification
+│   │   ├── classifier.py         # Conversational intent classifier
 │   │   ├── extractor.py          # Food entity & quantity extractor
 │   │   ├── food_db.py            # CSV nutritional lookup & fuzzy matcher
 │   │   ├── memory.py             # Historical context & habit streaks
@@ -92,7 +108,7 @@ Wellora/
 │   │   └── food-calorie-data.csv # Food calories, protein, carbs & fats
 │   ├── routers/
 │   │   ├── chat.py               # Conversational & meal logging API
-│   │   ├── dashboard.py          # Calorie totals & macro analytics
+│   │   ├── dashboard.py          # Daily totals & macro analytics
 │   │   └── users.py              # User profiles & dietary goals
 │   ├── database.py               # SQLite session setup
 │   ├── models.py                 # SQLAlchemy schemas
@@ -124,9 +140,9 @@ Wellora/
 ### 1. Prerequisites
 - **Python 3.10+**
 - **Node.js 18+**
-- [Ollama](https://ollama.com/) installed and running locally
+- [Ollama](https://ollama.com/) running locally
 
-Pull your model of choice via Ollama:
+Pull the local model:
 ```bash
 ollama run gemma2
 # or: ollama run llama3
@@ -152,16 +168,16 @@ uvicorn main:app --reload --port 8000
 ```
 
 ### 4. Frontend Setup
-In a new terminal:
+In a new terminal window:
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
-Open [http://localhost:5173](http://localhost:5173) in your browser to interact with the 3D Orb and start logging meals.
+Open [http://localhost:5173](http://localhost:5173) to interact with the 3D Orb and log your first meal.
 
 ---
 
 <p align="center">
-  Crafted with care by <a href="https://github.com/itsgoksz">itsgoksz</a>
+  Crafted for health and privacy by <a href="https://github.com/itsgoksz">itsgoksz</a>
 </p>
