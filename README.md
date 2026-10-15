@@ -3,7 +3,7 @@
 > Private, local-first AI nutrition companion with an interactive 3D voice orb. Speak your meals naturally in plain language; Wellora decomposes ingredients, estimates portions, and tracks macronutrients via offline local LLMs without cloud surveillance.
 
 <p align="center">
-  <img src="assets/preview.png" alt="Wellora Interface" width="100%" style="border-radius: 18px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.12);" />
+  <img src="assets/preview.png" alt="Wellora Conversational Voice Meal Logging" width="380" style="border-radius: 28px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.12);" />
 </p>
 
 ---
@@ -15,11 +15,36 @@ Logging food in mainstream fitness apps feels like data entry punishment:
 - Commercial apps monetize your health data, packaging your diet logs for advertising networks.
 - Rigid calorie goals turn nutrition into an anxiety-inducing spreadsheet instead of a sustainable, healthy habit.
 
-**Wellora was built around four simple principles:**
-1. **Natural Conversational Logging:** Say *"had two dosas with coconut chutney, sambar, and filter coffee"*—Wellora automatically breaks the meal down into ingredients, portions, calories, and macros.
-2. **Local-First Privacy:** Powered by local open-weight LLMs via **Ollama** (Gemma 2 or Llama 3) running directly on your hardware. What you eat never leaves your machine.
-3. **Immersive Physical 3D Orb:** Instead of clinical forms, Wellora features a responsive **Three.js glowing voice sphere** that pulses, ripples, and responds to your voice states in real time.
-4. **Zero Hallucinated Calories:** Rather than letting the LLM guess calorie numbers out of thin air, Wellora queries curated offline nutritional datasets (`food-calorie-data.csv`) using fuzzy matching to ground every macro count in reality.
+**Wellora makes food tracking effortless through four core principles:**
+1. **Effortless Voice-First Meal Logging:** Instead of typing numbers into rigid forms or scanning barcodes, simply speak out loud: *"I had 3 plain dosas with one serving of coconut chutney for lunch"*. Wellora captures speech in real time, parses regional Indian recipes, and breaks the meal down into exact calories and macros.
+2. **Synchronized Chat & Dual-Modality:** Spoken food logs are transcribed instantly into the chat interface with an immediate visual nutrition card (calories, protein, carbs, fats). You can log completely through voice hands-free, or seamlessly type into the chat prompt whenever preferred.
+3. **Local-First Privacy:** Powered by local open-weight LLMs via **Ollama** (Gemma 2 or Llama 3) running directly on your machine. Your dietary habits and health logs never leave your device.
+4. **Zero Hallucinated Nutrition:** Rather than letting the LLM guess numbers, Wellora matches parsed ingredients against verified nutritional datasets (`food-calorie-data.csv`) using fuzzy matching to ensure grounded macro accuracy.
+
+---
+
+## Conversational Logging & Dietary Intelligence
+
+### 1. Hands-Free Voice Meal Logging
+Log meals naturally in plain English or regional terms. Wellora automatically transcribes your voice, identifies portion sizes, and presents an instant nutritional summary.
+
+<p align="center">
+  <img src="assets/preview.png" alt="Conversational Voice Logging and Nutrition Card" width="380" style="border-radius: 28px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.12);" />
+</p>
+
+### 2. Nightly Review & Cognitive Insights
+At the end of each day, Wellora synthesizes your eating rhythm against weekly habits, offering supportive cognitive insights without clinical guilt.
+
+<p align="center">
+  <img src="assets/review_preview.png" alt="Nightly Review and Cognitive Health Insights" width="380" style="border-radius: 28px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.12);" />
+</p>
+
+### 3. Macro Distribution & Nutrition Timeline
+Track progress against daily dietary targets with macro progress bars (Protein, Carbs, Fats, Fibre), overall balance scores, and chronological meal timelines.
+
+<p align="center">
+  <img src="assets/analytics_preview.png" alt="Daily Macro Distribution and Nutrition Timeline" width="380" style="border-radius: 28px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.12);" />
+</p>
 
 ---
 
@@ -84,7 +109,9 @@ Cached Neural Audio Synthesis]
 ```text
 Wellora/
 ├── assets/                       # Branding & showcase captures
-│   ├── preview.png               # Live dashboard & 3D orb capture
+│   ├── preview.png               # Conversational voice logging & nutrition card
+│   ├── review_preview.png        # Nightly review & cognitive health insights
+│   ├── analytics_preview.png     # Macro distribution & nutrition timeline
 │   └── hero.png                  # Companion branding asset
 ├── backend/                      # Python FastAPI server
 │   ├── agents/                   # LangGraph agent pipeline
