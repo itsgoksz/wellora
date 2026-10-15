@@ -112,7 +112,6 @@ Wellora/
 │   ├── preview.png               # Conversational voice logging & nutrition card
 │   ├── review_preview.png        # Nightly review & cognitive health insights
 │   ├── analytics_preview.png     # Macro distribution & nutrition timeline
-│   └── hero.png                  # Companion branding asset
 ├── backend/                      # Python FastAPI server
 │   ├── agents/                   # LangGraph agent pipeline
 │   │   ├── orchestrator.py       # Main state machine & pipeline flow
