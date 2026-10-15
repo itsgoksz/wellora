@@ -1,21 +1,21 @@
-# 🌿 Wellora
+# Wellora
 
-> **Private, local-first AI nutrition companion with an interactive 3D voice orb.** Speak your meals naturally in plain language; Wellora decomposes ingredients, estimates portions, and tracks macronutrients via offline local LLMs without cloud surveillance.
+> Private, local-first AI nutrition companion with an interactive 3D voice orb. Speak your meals naturally in plain language; Wellora decomposes ingredients, estimates portions, and tracks macronutrients via offline local LLMs without cloud surveillance.
 
 <p align="center">
-  <img src="assets/wellora_hero_preview.png" alt="Wellora Product Showcase" width="100%" style="border-radius: 18px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.12);" />
+  <img src="assets/preview.png" alt="Wellora Interface" width="100%" style="border-radius: 18px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.12);" />
 </p>
 
 ---
 
-## 🍃 Why Wellora?
+## Why Wellora?
 
 Logging food in mainstream fitness apps feels like data entry punishment:
 - You spend 10 minutes scanning barcodes, guessing gram weights for home-cooked Indian dishes, and manually entering oil spoons.
 - Commercial apps monetize your health data, packaging your diet logs for advertising networks.
 - Rigid calorie goals turn nutrition into an anxiety-inducing spreadsheet instead of a sustainable, healthy habit.
 
-**Wellora was built around three simple principles:**
+**Wellora was built around four simple principles:**
 1. **Natural Conversational Logging:** Say *"had two dosas with coconut chutney, sambar, and filter coffee"*—Wellora automatically breaks the meal down into ingredients, portions, calories, and macros.
 2. **Local-First Privacy:** Powered by local open-weight LLMs via **Ollama** (Gemma 2 or Llama 3) running directly on your hardware. What you eat never leaves your machine.
 3. **Immersive Physical 3D Orb:** Instead of clinical forms, Wellora features a responsive **Three.js glowing voice sphere** that pulses, ripples, and responds to your voice states in real time.
@@ -23,15 +23,7 @@ Logging food in mainstream fitness apps feels like data entry punishment:
 
 ---
 
-## 📱 Live Experience & Visual Dashboard
-
-<p align="center">
-  <img src="assets/preview.png" alt="Wellora Live Dashboard & 3D Orb Preview" width="100%" style="border-radius: 16px; box-shadow: 0 16px 40px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);" />
-</p>
-
----
-
-## 🧠 Nutrition Intelligence Pipeline
+## Nutrition Intelligence Pipeline
 
 Wellora's architecture combines **FastAPI**, **LangGraph**, and **Ollama** into an asynchronous stateful pipeline:
 
@@ -73,7 +65,7 @@ Cached Neural Audio Synthesis]
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Layer | Technology | Description |
 | :--- | :--- | :--- |
@@ -87,12 +79,11 @@ Cached Neural Audio Synthesis]
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```text
 Wellora/
 ├── assets/                       # Branding & showcase captures
-│   ├── wellora_hero_preview.png  # Namma Universe product showcase
 │   ├── preview.png               # Live dashboard & 3D orb capture
 │   └── hero.png                  # Companion branding asset
 ├── backend/                      # Python FastAPI server
@@ -135,7 +126,7 @@ Wellora/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### 1. Prerequisites
 - **Python 3.10+**
